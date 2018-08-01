@@ -28,6 +28,6 @@ public class MainController {
             e.printStackTrace();
             model.addAttribute("message", "Ошибка");
         }
-        return "index";
+        return "main";
     }
 }

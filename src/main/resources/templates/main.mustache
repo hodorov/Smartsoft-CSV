@@ -36,13 +36,28 @@
         </ul>
     </div>
 </nav>
-{{#message}}
-    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+<div class="{{#message}}d-flex{{/message}} justify-content-center align-items-center flex-grow-1" {{^message}}style="height: 100%; overflow: scroll; display: initial!important;"{{/message}}>
+    {{#message}}
         <h1>
             {{message}}
         </h1>
-    </div>
-{{/message}}
+    {{/message}}
+    {{^message}}
+        <table class="table container">
+            <tr class="row">
+                {{#headers}}
+                    <th class="col-6" scope="col"><h2>{{.}}</h2></th>
+                {{/headers}}
+            </tr>
+            {{#records}}
+            <tr class="row">
+                {{#.}}
+                    <td class="col-6">{{.}}</td>
+                {{/.}}
+            {{/records}}
+        </table>
+    {{/message}}
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
