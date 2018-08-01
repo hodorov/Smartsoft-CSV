@@ -11,4 +11,5 @@ import java.util.List;
 public interface RecordRepository extends JpaRepository<Record, Long> {
 
     List<Record> findAllByYmdhBetween(Date fromDate, Date toDate);
+    List<Record> findAllBySubtypeIsNotIn(String[] subtype);
 }

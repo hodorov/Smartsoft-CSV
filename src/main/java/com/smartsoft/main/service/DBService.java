@@ -38,6 +38,10 @@ public class DBService {
         recordRepository.deleteAll();
     }
 
+    public List<Record> unfinishedForms() {
+        return recordRepository.findAllBySubtypeIsNotIn(new String[]{"done", "send", "success"});
+    }
+
     public ArrayList<SSOIDAndFormIDs> formsByTime(Date fromDate, Date toDate) {
         HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
 

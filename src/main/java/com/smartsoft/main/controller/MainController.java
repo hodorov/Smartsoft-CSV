@@ -42,6 +42,14 @@ public class MainController {
         return "main";
     }
 
+    @GetMapping("/unfinished")
+    public String unfinished(Model model) {
+        model.addAttribute("headers", new String[]{"SSOID", "ID форм(ы)", "Состояние"});
+        model.addAttribute("colWidth", 4);
+        model.addAttribute("records", dbService.unfinishedForms().stream().map(uf -> new String[]{uf.getSsoid(), uf.getFormid(), uf.getSubtype()}).toArray());
+        return "main";
+    }
+
     @GetMapping("/loadCSV")
     public String loadCSV(Model model) {
         try {
