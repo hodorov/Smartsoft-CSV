@@ -46,6 +46,7 @@ public class MainController {
     @GetMapping("/loadCSV")
     public String loadCSV(Model model) {
         try {
+            dbService.deleteAll();
             dbService.addAll(CSVService.parseCSVFileToRecords());
             model.addAttribute("message", "Готово");
         } catch (IOException e) {

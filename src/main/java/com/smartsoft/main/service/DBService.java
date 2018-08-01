@@ -34,6 +34,10 @@ public class DBService {
         entityManager.close();
     }
 
+    public void deleteAll() {
+        recordRepository.deleteAll();
+    }
+
     public ArrayList<SSOIDAndFormIDs> formsByTime(Date fromDate, Date toDate) {
         HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
 
