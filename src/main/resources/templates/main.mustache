@@ -13,7 +13,7 @@
     <title>Smartsoft demo</title>
 </head>
 <body class="d-flex flex-column">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
     <a class="navbar-brand" href="#">Smartsoft</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@
         </ul>
     </div>
 </nav>
-<div class="{{#message}}d-flex{{/message}} justify-content-center align-items-center flex-grow-1" {{^message}}style="height: 100%; overflow: scroll; display: initial!important;"{{/message}}>
+<div class="{{#message}}d-flex{{/message}} justify-content-center align-items-center flex-grow-1" style="margin-top: 56px;{{^message}} height: 100%; overflow: scroll; display: initial!important;{{/message}}">
     {{#message}}
         <h1>
             {{message}}
