@@ -32,13 +32,12 @@ public class MainController {
     @GetMapping("/last")
     public String last(Model model) {
         model.addAttribute("headers", new String[]{"SSOID", "ID форм(ы)"});
-        model.addAttribute("records", new int[][]{new int[]{1, 2}, new int[]{5, 3}});
+        model.addAttribute("colWidth", 6);
         //Date now = new Date();
         Date now = new GregorianCalendar(2017, 6, 11, 9, 0).getTime();
         Date past = new Date(now.getTime() - 3600 * 1000);
 
         ArrayList<SSOIDAndFormIDs> usersForms = dbService.formsByTime(past, now);
-
         model.addAttribute("records", usersForms.stream().map(uf -> new String[]{uf.getSsoId(), uf.formIdsToString()}).toArray());
         return "main";
     }
