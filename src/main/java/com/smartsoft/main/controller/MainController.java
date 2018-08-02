@@ -50,6 +50,14 @@ public class MainController {
         return "main";
     }
 
+    @GetMapping("/top")
+    public String top(Model model) {
+        model.addAttribute("headers", new String[]{"ID форм(ы)", "Количество"});
+        model.addAttribute("colWidth", 6);
+        model.addAttribute("records", dbService.topForms().entrySet().stream().map(uf -> new String[]{uf.getKey(), uf.getValue().toString()}).toArray());
+        return "main";
+    }
+
     @GetMapping("/loadCSV")
     public String loadCSV(Model model) {
         try {

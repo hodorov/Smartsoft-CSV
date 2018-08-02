@@ -42,13 +42,30 @@ public class DBService {
         return recordRepository.findAllBySubtypeIsNotIn(new String[]{"done", "send", "success"});
     }
 
+    public HashMap<String, Integer> topForms() {
+        Map<String, Integer> hashMap = new HashMap<>();
+        recordRepository
+                .findAll()
+                .stream()
+                .filter(r -> r.getFormid() != null && !r.getFormid().isEmpty())
+                .forEach(record -> hashMap.put(record.getFormid(), hashMap.getOrDefault(record.getFormid(), 0) + 1));
+
+        return hashMap
+                .entrySet()
+                .stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(5)
+                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+    }
+
     public ArrayList<SSOIDAndFormIDs> formsByTime(Date fromDate, Date toDate) {
         HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
 
         List<Record> latestRecords = recordRepository.findAllByYmdhBetween(fromDate, toDate);
         latestRecords
                 .stream()
-                .filter(record -> !record.getFormid().isEmpty())
+                .filter(record -> record.getFormid() != null && !record.getFormid().isEmpty())
                 .forEach(record -> {
                     if (hashMap.containsKey(record.getSsoid())) {
                         hashMap.get(record.getSsoid()).add(record.getFormid());
