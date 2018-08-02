@@ -61,9 +61,8 @@ public class DBService {
 
     public ArrayList<SSOIDAndFormIDs> formsByTime(Date fromDate, Date toDate) {
         HashMap<String, ArrayList<String>> hashMap = new HashMap<>();
-
-        List<Record> latestRecords = recordRepository.findAllByYmdhBetween(fromDate, toDate);
-        latestRecords
+        recordRepository
+                .findAllByYmdhBetween(fromDate, toDate)
                 .stream()
                 .filter(record -> record.getFormid() != null && !record.getFormid().isEmpty())
                 .forEach(record -> {
@@ -75,6 +74,7 @@ public class DBService {
                         }});
                     }
                 });
+
         return hashMap
                 .entrySet()
                 .stream()
