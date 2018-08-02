@@ -13,7 +13,7 @@
     <title>Smartsoft demo</title>
 </head>
 <body class="d-flex flex-column">
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top bg-primary">
     <a class="navbar-brand" href="#">Smartsoft</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,13 +36,28 @@
         </ul>
     </div>
 </nav>
-{{#message}}
-    <div class="d-flex justify-content-center align-items-center flex-grow-1">
+<div class="{{#message}}d-flex{{/message}} justify-content-center align-items-center flex-grow-1" style="margin-top: 56px;{{^message}} height: 100%; overflow: scroll; display: initial!important;{{/message}}">
+    {{#message}}
         <h1>
             {{message}}
         </h1>
-    </div>
-{{/message}}
+    {{/message}}
+    {{^message}}
+        <table class="table container">
+            <tr class="row">
+                {{#headers}}
+                    <th class="col-{{colWidth}}" scope="col"><h2>{{.}}</h2></th>
+                {{/headers}}
+            </tr>
+            {{#records}}
+            <tr class="row">
+                {{#.}}
+                    <td class="col-{{colWidth}}">{{.}}</td>
+                {{/.}}
+            {{/records}}
+        </table>
+    {{/message}}
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
