@@ -25,6 +25,9 @@ public class Record {
     @Temporal(TemporalType.TIMESTAMP)
     private Date ymdh;
 
+    public Record() {
+    }
+
     public Record(String recordData) {
         /*
         ;           // Split on semicolon
